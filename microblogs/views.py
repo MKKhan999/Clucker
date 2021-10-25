@@ -1,25 +1,41 @@
 from django.shortcuts import render, redirect
-from .forms import SignUpForm, LogInForm
+from .forms import SignUpForm, LogInForm, PostForm
 from django.contrib.auth import authenticate, login, logout, get_user_model
 from django.contrib import messages
-from .models import Post
+from .models import Post, User
 
 # Create your views here.
 
 def feed(request):
     model = Post
-    posts = Post.objects.filter(created_at__isnull=False).order_by()
+    posts = Post.objects.filter(author=request.user).order_by()
     return render(request,'feed.html', {'posts':posts})
 
+def edit_feed(request):
+    model = PostForm(request.POST)
+    posts = Post.objects.filter(author=request.user).order_by()
+    return render(request,'edit_feed.html', {'posts':posts,"form":model})
+
+def make_new_post(request):
+    if request.method == 'POST':
+        form = PostForm(request.POST)
+        if form.is_valid():
+            posts = Post.objects.all().filter(author = request.user)
+            user = form.save(request.user)
+            return redirect('feed')
+    else:
+        form = PostForm()
+    return render(request, 'make_new_post.html',{"form": form})
+
+
 def user_list(request):
-    model = get_user_model()
-    users = get_user_model().objects.all()
-    return render(request, 'user_list.html', {'users': users})
+    model = User
+    posts = User.objects.all()
+    return render(request, 'user_list.html', {'users': posts  })
 
 def show_user(request):
-    pass
-    # users = get_user_model().objects.get(id=user_id)
-    # posts = Post.objects.filter(author_id = user_id).order_by()
+    users = get_user_model().objects.get(id=user_id)
+    posts = Post.objects.filter(author_id = user_id).order_by()
 
 def log_in(request):
     if request.method == 'POST':

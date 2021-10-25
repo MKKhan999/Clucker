@@ -41,7 +41,7 @@ class SignUpForm(forms.ModelForm):
 
 class PostForm(forms.ModelForm):
     class Meta:
-        model = Post;
+        model = Post
         fields = ['text']
         widgets = {'text': forms.Textarea()}
 

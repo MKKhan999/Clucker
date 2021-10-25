@@ -1,0 +1,14 @@
+<html>
+<head>
+  <title>Clucker</title>
+</head>
+ <body>
+ <h1> Edit post</h1>
+  <form action = "{%url 'edit_feed' %}" method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      {{ post.text}} - <a href="{% url 'feed' %}" > Edit</a> </li>
+
+  </form>
+ </body>
+</html>

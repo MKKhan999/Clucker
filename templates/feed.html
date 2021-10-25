@@ -5,5 +5,14 @@
  <body>
  <p>This is the opening body statement!</p>
  <p>Current Feed!</p>
+ <ul>
+    {% for post in posts %}
+    <li> {{ post.author }} - {{ post.created_at }}<br/>
+    {{ post.text}} - <a href="{% url 'edit_feed' %}" > Edit</a> </li>
+
+        <br>
+    {% endfor %}
+     {{ post.text}} - <a href="{% url 'make_new_post' %}" > New Post</a> </li>
+</ul>
  </body>
 </html>
