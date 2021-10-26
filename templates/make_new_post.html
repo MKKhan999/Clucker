@@ -3,7 +3,7 @@
   <title>Clucker</title>
 </head>
  <body>
- <h1> Edit post</h1>
+ <h1> Make post</h1>
   <form action = "{%url 'make_new_post' %}" method="post">
       {% csrf_token %}
       {{ form.as_p }}

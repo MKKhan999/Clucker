@@ -1,0 +1,20 @@
+<html>
+  <head>
+    <title>Cluckers</title>
+  </head>
+  <body>
+    <div>
+      <h1>{{user.username}}'s Profile</h1>
+      <p>Name: {{user.first_name}}</p>
+      <p>Surname: {{user.last_name}}</p>
+      <p>Email: {{user.email}}</p>
+      <p>Bio: {{user.bio}}</p>
+    </div>
+  </body>
+  <footer>
+    <forn action="{% url 'user_list' %}" method="post">
+      {% csrf_token %}
+      <p><a href='{% url 'user_list' %}'>Go back</a></p>
+  </forn>
+  </footer>
+</html>

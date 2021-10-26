@@ -1,16 +1,38 @@
+{#<html>#}
+{#<head>#}
+{#  <title>Feed</title>#}
+{#</head>#}
+{# <body>#}
+{# <p>This is the opening body statement!</p>#}
+{# <p>Current Feed!</p>#}
+{# <ul>#}
+{#    {% for User in users %}#}
+{#    <li> {{ User.username }}#}
+{#        #}
+{#        <br/>#}
+{#        <br>#}
+{#    {% endfor %}#}
+{#     <a href="{% url 'home' %}" > Home</a> </li>#}
+{#</ul>#}
+{# </body>#}
+{#</html>#}
+
 <html>
 <head>
-  <title>Feed</title>
+    <title>Cluckers</title>
 </head>
- <body>
- <p>This is the opening body statement!</p>
- <p>Current Feed!</p>
- <ul>
-    {% for User in users %}
-    <li> {{ User.username }}<br/>
-        <br>
-    {% endfor %}
-     <a href="{% url 'home' %}" > Home</a> </li>
-</ul>
- </body>
+<body>
+<h1>User List</h1>
+{% for user in users %}
+<p>
+    <a href="{%url 'show_user' user.pk %}">{{user.username}}</a>
+</p>
+{%endfor%}
+</body>
+<footer>
+    <forn action="% url 'feed'%" method="post">
+        {% csrf_token %}
+        <p><a href='{% url 'home' %}'>Home</a></p>
+    </forn>
+</footer>
 </html>

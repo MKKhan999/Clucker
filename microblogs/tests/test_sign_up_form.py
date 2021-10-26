@@ -51,6 +51,15 @@ class SignUpFormTestCase(TestCase):
         form = SignUpForm(data=self.form_input)
         self.assertTrue(form.is_valid())
 
+    def test_new_password_and_password_confirmation_are_identical(self):
+        self.form_input['password_confirmation'] = 'WrongPassword123'
+        form = SignUpForm(data=self.form_input)
+        self.assertFalse(form.is_valid())
+
+
+
+
+
 
 
 

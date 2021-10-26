@@ -4,10 +4,10 @@
 </head>
  <body>
  <h1> Edit post</h1>
-  <form action = "{%url 'edit_feed' %}" method="post">
+  <form action = "{%url 'edit_feed' user.pk %}" method="post">
       {% csrf_token %}
       {{ form.as_p }}
-      {{ post.text}} - <a href="{% url 'feed' %}" > Edit</a> </li>
+      <input type="submit" value="Update Post">
 
   </form>
  </body>

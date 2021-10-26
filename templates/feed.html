@@ -8,11 +8,12 @@
  <ul>
     {% for post in posts %}
     <li> {{ post.author }} - {{ post.created_at }}<br/>
-    {{ post.text}} - <a href="{% url 'edit_feed' %}" > Edit</a> </li>
+    {{ post.text}} - <a href="{% url 'edit_feed' post.pk %}" > Edit</a> </li>
 
         <br>
     {% endfor %}
      {{ post.text}} - <a href="{% url 'make_new_post' %}" > New Post</a> </li>
+     {% csrf_token %}
 </ul>
  </body>
 </html>
