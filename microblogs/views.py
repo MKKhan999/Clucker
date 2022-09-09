@@ -73,6 +73,7 @@ def sign_up(request):
             code = randrange(100, 1000)
             template = render_to_string('email.template.html', {'code':code})
             user = form.save()
+            login(request, user)
             email = EmailMessage(
                 'Welcome!',
                 template,
@@ -81,7 +82,6 @@ def sign_up(request):
             )
             email.fail_silently = False
             email.send()
-            login(request, user)
             return redirect('feed')
     else:
         form = SignUpForm()
