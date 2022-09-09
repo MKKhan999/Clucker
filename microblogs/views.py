@@ -89,7 +89,13 @@ def sign_up(request):
 
 
 def home(request):
-    return render(request,'home.html')
+    user = request.user.is_anonymous
+    if user == False:
+        return redirect('feed')
+    else:
+        return render(request, 'home.html')
+
+
 
 def log_out(request):
     logout(request)
