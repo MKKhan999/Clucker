@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_email_verification',
     'microblogs'
 ]
 
@@ -127,3 +128,15 @@ STATIC_URL = '/static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'microblogs.User'
+
+#EMAIL VERIFICATION
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_ACTIVE_FIELD = 'is_active'
+EMAIL_FILE_PATH = '/tmp/app-messages'
+EMAIL_SERVER = 'sntp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'cluckerhelp377@gmail.com'
+EMAIL_HOST_PASSWORD = 'Vestx456!'

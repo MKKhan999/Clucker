@@ -1,6 +1,9 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse
-
+from django.core.mail import EmailMessage
+from django.conf import settings
+from django.template.loader import render_to_string
+from random import randint, randrange
 from .forms import SignUpForm, LogInForm, PostForm
 from django.contrib.auth import authenticate, login, logout, get_user_model
 from django.contrib import messages
@@ -67,7 +70,17 @@ def sign_up(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
         if form.is_valid():
+            code = randrange(100, 1000)
+            template = render_to_string('email.template.html', {'code':code})
             user = form.save()
+            email = EmailMessage(
+                'Welcome!',
+                template,
+                settings.EMAIL_HOST_USER,
+                [request.user.email],
+            )
+            email.fail_silently = False
+            email.send()
             login(request, user)
             return redirect('feed')
     else:
