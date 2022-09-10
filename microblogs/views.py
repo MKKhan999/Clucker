@@ -13,9 +13,14 @@ from django.views.generic import UpdateView
 # Create your views here.
 
 def feed(request):
-    model = Post
-    posts = Post.objects.filter(author=request.user).order_by()
-    return render(request,'feed.html', {'posts':posts})
+    user = request.user.is_anonymous
+    if user == True:
+        return redirect('home')
+    else:
+        model = Post
+        posts = Post.objects.filter(author=request.user).order_by()
+        return render(request, 'feed.html', {'posts': posts})
+
 
 def edit_feed(request, post_id):
     post = Post.objects.get(pk = post_id)
